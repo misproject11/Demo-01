@@ -1,18 +1,20 @@
 <!DOCTYPE html>
-<html lang="id">
+<html lang="id" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <meta name="description" content="Warung Nusantara — Halaman Pemesanan & Pembayaran" />
   <title>Pesan Sekarang — Warung Nusantara</title>
-
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=DM+Sans:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <script src="https://unpkg.com/lucide@latest/dist/umd/lucide.js"></script>
-
   <link rel="stylesheet" href="css/style.css" />
   <link rel="stylesheet" href="css/order.css" />
+  <style>
+    /* Inline fallback agar halaman tidak kosong jika CSS gagal load */
+    body { background:#0d0a07; color:#f0e8d8; font-family:'DM Sans',sans-serif; margin:0; }
+    .order-main { max-width:1100px; margin:0 auto; padding:100px 1.5rem 4rem; }
+  </style>
 </head>
 <body>
 
@@ -27,11 +29,11 @@
         </svg>
         <span>Warung <em>Nusantara</em></span>
       </a>
-      <div class="nav-actions" style="margin-left:auto">
+      <div class="nav-actions" style="margin-left:auto;display:flex;align-items:center;gap:8px">
         <button class="btn-icon" id="themeToggle" aria-label="Toggle theme">
           <i data-lucide="sun"></i>
         </button>
-        <a href="index.html" class="btn-ghost" style="padding:0.45rem 1rem;font-size:0.8rem;">
+        <a href="index.html" class="btn-ghost" style="padding:0.45rem 1rem;font-size:0.8rem;display:inline-flex;align-items:center;gap:6px">
           <i data-lucide="arrow-left" style="width:14px;height:14px"></i>
           Kembali
         </a>
@@ -65,23 +67,19 @@
       </div>
     </div>
 
-    <!-- STEP 1 — REVIEW ORDER -->
+    <!-- STEP 1 -->
     <section class="order-section" id="panel-1">
       <div class="order-grid">
         <div class="order-left">
           <div class="order-card reveal-up">
             <div class="order-card-header">
               <h2>Ringkasan Pesanan</h2>
-              <a href="menu.html" class="link-small">
+              <a href="index.html#menu" class="link-small">
                 <i data-lucide="plus" style="width:13px;height:13px"></i>
                 Tambah Menu
               </a>
             </div>
-
-            <div id="order-items-list" class="order-items-list">
-              <!-- JS inject -->
-            </div>
-
+            <div id="order-items-list" class="order-items-list"></div>
             <div class="order-empty" id="order-empty" style="display:none">
               <svg width="56" height="56" viewBox="0 0 56 56" fill="none">
                 <circle cx="28" cy="28" r="24" stroke="#c8973a" stroke-width="1" opacity="0.3"/>
@@ -93,35 +91,15 @@
                 <a href="index.html#menu" style="color:var(--gold)">Kembali pilih menu</a>
               </p>
             </div>
-
-            <!-- Platform tambahan -->
             <div class="platform-alt reveal-up">
               <p class="platform-alt-label">Atau pesan langsung via platform:</p>
               <div class="platform-alt-btns">
-                <a href="https://gofood.co.id" target="_blank" rel="noopener" class="platform-alt-btn gofood">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <circle cx="9" cy="9" r="7" fill="#e02020" opacity="0.2"/>
-                    <path d="M5 9C5 6.8 6.8 5 9 5C10.2 5 11.3 5.6 12 6.5" stroke="#e02020" stroke-width="1.5" stroke-linecap="round"/>
-                    <path d="M13 9C13 11.2 11.2 13 9 13C7.8 13 6.7 12.4 6 11.5" stroke="#e02020" stroke-width="1.5" stroke-linecap="round"/>
-                    <circle cx="9" cy="9" r="2" fill="#e02020"/>
-                  </svg>
-                  GoFood
-                </a>
-                <a href="https://shopeefood.co.id" target="_blank" rel="noopener" class="platform-alt-btn shopee">
-                  <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                    <circle cx="9" cy="9" r="7" fill="#ff5722" opacity="0.2"/>
-                    <path d="M6 7C6 5.9 7.3 5 9 5C10.7 5 12 5.9 12 7" stroke="#ff5722" stroke-width="1.5" stroke-linecap="round"/>
-                    <rect x="5" y="7" width="8" height="7" rx="1.5" stroke="#ff5722" stroke-width="1.2"/>
-                    <circle cx="9" cy="10" r="1.2" fill="#ff5722"/>
-                  </svg>
-                  ShopeeFood
-                </a>
+                <a href="https://gofood.co.id" target="_blank" rel="noopener" class="platform-alt-btn gofood">GoFood</a>
+                <a href="https://shopeefood.co.id" target="_blank" rel="noopener" class="platform-alt-btn shopee">ShopeeFood</a>
               </div>
             </div>
           </div>
         </div>
-
-        <!-- ORDER SUMMARY SIDEBAR -->
         <div class="order-right">
           <div class="summary-card reveal-up">
             <h3>Detail Harga</h3>
@@ -140,23 +118,20 @@
       </div>
     </section>
 
-    <!-- STEP 2 — DATA DIRI -->
+    <!-- STEP 2 -->
     <section class="order-section" id="panel-2" style="display:none">
       <div class="order-grid">
         <div class="order-left">
           <div class="order-card reveal-up">
-            <div class="order-card-header">
-              <h2>Data Diri &amp; Pengiriman</h2>
-            </div>
-
+            <div class="order-card-header"><h2>Data Diri &amp; Pengiriman</h2></div>
             <div class="form-grid">
               <div class="form-group">
                 <label for="inp-nama">Nama Lengkap <span class="req">*</span></label>
-                <input type="text" id="inp-nama" placeholder="cth: Budi Santoso" autocomplete="name" />
+                <input type="text" id="inp-nama" placeholder="cth: Budi Santoso" autocomplete="name"/>
               </div>
               <div class="form-group">
                 <label for="inp-hp">Nomor WhatsApp <span class="req">*</span></label>
-                <input type="tel" id="inp-hp" placeholder="cth: 081234567890" autocomplete="tel" />
+                <input type="tel" id="inp-hp" placeholder="cth: 081234567890" autocomplete="tel"/>
               </div>
               <div class="form-group full">
                 <label for="inp-alamat">Alamat Pengiriman <span class="req">*</span></label>
@@ -164,7 +139,7 @@
               </div>
               <div class="form-group">
                 <label for="inp-catatan">Catatan Pesanan</label>
-                <input type="text" id="inp-catatan" placeholder="cth: Tidak pakai sambal, ekstra nasi" />
+                <input type="text" id="inp-catatan" placeholder="cth: Tidak pakai sambal"/>
               </div>
               <div class="form-group">
                 <label for="inp-delivery">Metode Pengambilan <span class="req">*</span></label>
@@ -180,7 +155,6 @@
             </div>
           </div>
         </div>
-
         <div class="order-right">
           <div class="summary-card reveal-up">
             <h3>Ringkasan</h3>
@@ -194,32 +168,27 @@
               <span>Total</span>
               <strong id="summary-grand-2">Rp 0</strong>
             </div>
-            <button class="btn-primary w-full" id="btn-next-2" onclick="validateStep2()">
+            <button class="btn-primary w-full" onclick="validateStep2()">
               Pilih Pembayaran
               <i data-lucide="arrow-right" style="width:16px;height:16px"></i>
             </button>
             <button class="btn-ghost w-full" style="margin-top:0.5rem" onclick="goStep(1)">
-              <i data-lucide="arrow-left" style="width:14px;height:14px"></i>
-              Kembali
+              <i data-lucide="arrow-left" style="width:14px;height:14px"></i> Kembali
             </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STEP 3 — PEMBAYARAN -->
+    <!-- STEP 3 -->
     <section class="order-section" id="panel-3" style="display:none">
       <div class="order-grid">
         <div class="order-left">
           <div class="order-card reveal-up">
-            <div class="order-card-header">
-              <h2>Pilih Metode Pembayaran</h2>
-            </div>
-
-            <!-- Payment method selector -->
+            <div class="order-card-header"><h2>Pilih Metode Pembayaran</h2></div>
             <div class="pay-methods">
               <label class="pay-method active" id="pm-qris">
-                <input type="radio" name="payment" value="qris" checked />
+                <input type="radio" name="payment" value="qris" checked/>
                 <div class="pay-method-inner">
                   <div class="pay-icon">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -232,7 +201,6 @@
                       <rect x="16" y="16" width="4" height="4" fill="#c8973a" opacity="0.4"/>
                       <rect x="22" y="16" width="4" height="4" fill="#c8973a" opacity="0.4"/>
                       <rect x="16" y="22" width="4" height="4" fill="#c8973a" opacity="0.4"/>
-                      <rect x="22" y="22" width="6" height="6" rx="1" fill="#c8973a" opacity="0.3"/>
                     </svg>
                   </div>
                   <div class="pay-info">
@@ -242,9 +210,8 @@
                   <div class="pay-check"><i data-lucide="check"></i></div>
                 </div>
               </label>
-
               <label class="pay-method" id="pm-transfer">
-                <input type="radio" name="payment" value="transfer" />
+                <input type="radio" name="payment" value="transfer"/>
                 <div class="pay-method-inner">
                   <div class="pay-icon">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -260,9 +227,8 @@
                   <div class="pay-check"><i data-lucide="check"></i></div>
                 </div>
               </label>
-
               <label class="pay-method" id="pm-cod">
-                <input type="radio" name="payment" value="cod" />
+                <input type="radio" name="payment" value="cod"/>
                 <div class="pay-method-inner">
                   <div class="pay-icon">
                     <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
@@ -279,65 +245,44 @@
               </label>
             </div>
 
-            <!-- QRIS PANEL -->
+            <!-- QRIS -->
             <div class="qris-panel" id="qris-panel">
               <div class="qris-header">
-                <span class="section-tag">Scan & Bayar</span>
-                <p>Scan QR Code berikut menggunakan aplikasi dompet digital Anda</p>
+                <span class="section-tag">Scan &amp; Bayar</span>
+                <p>Scan QR Code menggunakan aplikasi dompet digital Anda</p>
               </div>
               <div class="qris-box">
-                <!-- QR Code placeholder — ganti dengan QR asli QRIS Anda -->
                 <div class="qris-img-wrap">
-                  <svg width="180" height="180" viewBox="0 0 180 180" fill="none" id="qris-svg">
-                    <!-- Border frame -->
+                  <svg width="180" height="180" viewBox="0 0 180 180" fill="none">
                     <rect x="2" y="2" width="176" height="176" rx="12" stroke="#c8973a" stroke-width="1.5" fill="#0d0a07"/>
-                    <!-- Corner markers -->
                     <rect x="12" y="12" width="40" height="40" rx="4" stroke="#c8973a" stroke-width="2" fill="none"/>
                     <rect x="18" y="18" width="28" height="28" fill="#c8973a" opacity="0.7" rx="2"/>
                     <rect x="128" y="12" width="40" height="40" rx="4" stroke="#c8973a" stroke-width="2" fill="none"/>
                     <rect x="134" y="18" width="28" height="28" fill="#c8973a" opacity="0.7" rx="2"/>
                     <rect x="12" y="128" width="40" height="40" rx="4" stroke="#c8973a" stroke-width="2" fill="none"/>
                     <rect x="18" y="134" width="28" height="28" fill="#c8973a" opacity="0.7" rx="2"/>
-                    <!-- Data dots pattern -->
-                    <g fill="#c8973a" opacity="0.5">
+                    <g fill="#c8973a" opacity="0.45">
                       <rect x="62" y="12" width="6" height="6" rx="1"/><rect x="72" y="12" width="6" height="6" rx="1"/>
                       <rect x="82" y="12" width="6" height="6" rx="1"/><rect x="102" y="12" width="6" height="6" rx="1"/>
-                      <rect x="62" y="22" width="6" height="6" rx="1"/><rect x="82" y="22" width="6" height="6" rx="1"/>
-                      <rect x="92" y="22" width="6" height="6" rx="1"/><rect x="112" y="22" width="6" height="6" rx="1"/>
-                      <rect x="72" y="32" width="6" height="6" rx="1"/><rect x="92" y="32" width="6" height="6" rx="1"/>
-                      <rect x="102" y="32" width="6" height="6" rx="1"/><rect x="62" y="42" width="6" height="6" rx="1"/>
-                      <rect x="12" y="62" width="6" height="6" rx="1"/><rect x="22" y="62" width="6" height="6" rx="1"/>
-                      <rect x="42" y="62" width="6" height="6" rx="1"/><rect x="62" y="62" width="6" height="6" rx="1"/>
-                      <rect x="82" y="62" width="6" height="6" rx="1"/><rect x="102" y="62" width="6" height="6" rx="1"/>
-                      <rect x="122" y="62" width="6" height="6" rx="1"/><rect x="142" y="62" width="6" height="6" rx="1"/>
-                      <rect x="162" y="62" width="6" height="6" rx="1"/><rect x="12" y="72" width="6" height="6" rx="1"/>
-                      <rect x="32" y="72" width="6" height="6" rx="1"/><rect x="52" y="72" width="6" height="6" rx="1"/>
-                      <rect x="72" y="72" width="6" height="6" rx="1"/><rect x="92" y="72" width="6" height="6" rx="1"/>
-                      <rect x="112" y="72" width="6" height="6" rx="1"/><rect x="132" y="72" width="6" height="6" rx="1"/>
-                      <rect x="152" y="72" width="6" height="6" rx="1"/><rect x="22" y="82" width="6" height="6" rx="1"/>
-                      <rect x="42" y="82" width="6" height="6" rx="1"/><rect x="62" y="82" width="6" height="6" rx="1"/>
-                      <rect x="82" y="82" width="6" height="6" rx="1"/><rect x="102" y="82" width="6" height="6" rx="1"/>
-                      <rect x="122" y="82" width="6" height="6" rx="1"/><rect x="142" y="82" width="6" height="6" rx="1"/>
-                      <rect x="162" y="82" width="6" height="6" rx="1"/><rect x="12" y="92" width="6" height="6" rx="1"/>
+                      <rect x="62" y="22" width="6" height="6" rx="1"/><rect x="92" y="22" width="6" height="6" rx="1"/>
+                      <rect x="112" y="22" width="6" height="6" rx="1"/><rect x="72" y="32" width="6" height="6" rx="1"/>
+                      <rect x="102" y="32" width="6" height="6" rx="1"/><rect x="12" y="62" width="6" height="6" rx="1"/>
+                      <rect x="32" y="62" width="6" height="6" rx="1"/><rect x="62" y="62" width="6" height="6" rx="1"/>
+                      <rect x="82" y="62" width="6" height="6" rx="1"/><rect x="112" y="62" width="6" height="6" rx="1"/>
+                      <rect x="142" y="62" width="6" height="6" rx="1"/><rect x="162" y="62" width="6" height="6" rx="1"/>
+                      <rect x="22" y="72" width="6" height="6" rx="1"/><rect x="52" y="72" width="6" height="6" rx="1"/>
+                      <rect x="72" y="72" width="6" height="6" rx="1"/><rect x="102" y="72" width="6" height="6" rx="1"/>
+                      <rect x="132" y="72" width="6" height="6" rx="1"/><rect x="12" y="82" width="6" height="6" rx="1"/>
+                      <rect x="42" y="82" width="6" height="6" rx="1"/><rect x="82" y="82" width="6" height="6" rx="1"/>
+                      <rect x="122" y="82" width="6" height="6" rx="1"/><rect x="162" y="82" width="6" height="6" rx="1"/>
                       <rect x="32" y="92" width="6" height="6" rx="1"/><rect x="72" y="92" width="6" height="6" rx="1"/>
-                      <rect x="92" y="92" width="6" height="6" rx="1"/><rect x="112" y="92" width="6" height="6" rx="1"/>
-                      <rect x="152" y="92" width="6" height="6" rx="1"/><rect x="22" y="102" width="6" height="6" rx="1"/>
-                      <rect x="52" y="102" width="6" height="6" rx="1"/><rect x="82" y="102" width="6" height="6" rx="1"/>
-                      <rect x="102" y="102" width="6" height="6" rx="1"/><rect x="132" y="102" width="6" height="6" rx="1"/>
-                      <rect x="162" y="102" width="6" height="6" rx="1"/><rect x="12" y="112" width="6" height="6" rx="1"/>
-                      <rect x="42" y="112" width="6" height="6" rx="1"/><rect x="62" y="112" width="6" height="6" rx="1"/>
-                      <rect x="122" y="112" width="6" height="6" rx="1"/><rect x="142" y="112" width="6" height="6" rx="1"/>
-                      <rect x="62" y="128" width="6" height="6" rx="1"/><rect x="82" y="128" width="6" height="6" rx="1"/>
-                      <rect x="102" y="128" width="6" height="6" rx="1"/><rect x="122" y="128" width="6" height="6" rx="1"/>
-                      <rect x="142" y="128" width="6" height="6" rx="1"/><rect x="162" y="128" width="6" height="6" rx="1"/>
-                      <rect x="72" y="138" width="6" height="6" rx="1"/><rect x="92" y="138" width="6" height="6" rx="1"/>
-                      <rect x="112" y="138" width="6" height="6" rx="1"/><rect x="152" y="138" width="6" height="6" rx="1"/>
-                      <rect x="62" y="148" width="6" height="6" rx="1"/><rect x="102" y="148" width="6" height="6" rx="1"/>
-                      <rect x="132" y="148" width="6" height="6" rx="1"/><rect x="162" y="148" width="6" height="6" rx="1"/>
-                      <rect x="82" y="158" width="6" height="6" rx="1"/><rect x="112" y="158" width="6" height="6" rx="1"/>
-                      <rect x="142" y="158" width="6" height="6" rx="1"/>
+                      <rect x="112" y="92" width="6" height="6" rx="1"/><rect x="152" y="92" width="6" height="6" rx="1"/>
+                      <rect x="62" y="128" width="6" height="6" rx="1"/><rect x="92" y="128" width="6" height="6" rx="1"/>
+                      <rect x="122" y="128" width="6" height="6" rx="1"/><rect x="162" y="128" width="6" height="6" rx="1"/>
+                      <rect x="72" y="138" width="6" height="6" rx="1"/><rect x="112" y="138" width="6" height="6" rx="1"/>
+                      <rect x="82" y="148" width="6" height="6" rx="1"/><rect x="132" y="148" width="6" height="6" rx="1"/>
+                      <rect x="102" y="158" width="6" height="6" rx="1"/><rect x="142" y="158" width="6" height="6" rx="1"/>
                     </g>
-                    <!-- Center logo -->
                     <rect x="75" y="75" width="30" height="30" rx="4" fill="#0d0a07"/>
                     <path d="M90 78L82 83.5V91.5L90 97L98 91.5V83.5L90 78Z" fill="#8b1a1a" opacity="0.9"/>
                     <path d="M90 81L85 84.5V90.5L90 94L95 90.5V84.5L90 81Z" fill="#c8973a" opacity="0.7"/>
@@ -362,7 +307,7 @@
               </div>
             </div>
 
-            <!-- TRANSFER PANEL -->
+            <!-- TRANSFER -->
             <div class="transfer-panel" id="transfer-panel" style="display:none">
               <div class="bank-accounts">
                 <div class="bank-card">
@@ -373,8 +318,7 @@
                     <span>a.n. Warung Nusantara</span>
                   </div>
                   <button class="copy-btn" onclick="copyText('1234567890')">
-                    <i data-lucide="copy" style="width:14px;height:14px"></i>
-                    Salin
+                    <i data-lucide="copy" style="width:14px;height:14px"></i> Salin
                   </button>
                 </div>
                 <div class="bank-card">
@@ -385,22 +329,21 @@
                     <span>a.n. Warung Nusantara</span>
                   </div>
                   <button class="copy-btn" onclick="copyText('0987654321')">
-                    <i data-lucide="copy" style="width:14px;height:14px"></i>
-                    Salin
+                    <i data-lucide="copy" style="width:14px;height:14px"></i> Salin
                   </button>
                 </div>
               </div>
               <p class="transfer-note">
                 <i data-lucide="info" style="width:13px;height:13px"></i>
-                Transfer sesuai nominal tepat agar memudahkan konfirmasi. Bukti transfer dikirim via WhatsApp.
+                Transfer sesuai nominal tepat. Kirim bukti transfer via WhatsApp.
               </p>
             </div>
 
-            <!-- COD PANEL -->
+            <!-- COD -->
             <div class="cod-panel" id="cod-panel" style="display:none">
               <div class="cod-info">
                 <i data-lucide="check-circle" style="width:32px;height:32px;color:var(--gold)"></i>
-                <p>Pembayaran dilakukan tunai saat pesanan tiba atau saat Anda makan di tempat. Pastikan menyiapkan uang pas.</p>
+                <p>Pembayaran dilakukan tunai saat pesanan tiba atau makan di tempat.</p>
               </div>
             </div>
           </div>
@@ -409,9 +352,7 @@
         <div class="order-right">
           <div class="summary-card reveal-up">
             <h3>Konfirmasi Pesanan</h3>
-            <div class="confirm-detail" id="confirm-detail">
-              <!-- JS inject -->
-            </div>
+            <div class="confirm-detail" id="confirm-detail"></div>
             <div class="summary-divider"></div>
             <div class="summary-row summary-total">
               <span>Total</span>
@@ -423,18 +364,17 @@
             </button>
             <p class="wa-note">
               <i data-lucide="message-circle" style="width:13px;height:13px"></i>
-              Pesanan otomatis terkirim ke WhatsApp admin kami
+              Pesanan otomatis terkirim ke WhatsApp admin
             </p>
             <button class="btn-ghost w-full" style="margin-top:0.5rem" onclick="goStep(2)">
-              <i data-lucide="arrow-left" style="width:14px;height:14px"></i>
-              Kembali
+              <i data-lucide="arrow-left" style="width:14px;height:14px"></i> Kembali
             </button>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- STEP 4 — SUKSES -->
+    <!-- STEP 4 -->
     <section class="order-section" id="panel-4" style="display:none">
       <div class="success-wrap reveal-up">
         <div class="success-icon">
@@ -452,7 +392,7 @@
         <div class="success-info" id="success-info"></div>
         <div class="success-actions">
           <a href="index.html" class="btn-primary">Kembali ke Beranda</a>
-          <a href="menu.html" class="btn-ghost">Pesan Lagi</a>
+          <a href="index.html#menu" class="btn-ghost">Pesan Lagi</a>
         </div>
       </div>
     </section>
@@ -465,5 +405,10 @@
 
   <script src="js/app.js"></script>
   <script src="js/order.js"></script>
+  <script>
+    // Pastikan theme tersimpan
+    const t = localStorage.getItem('wn_theme') || 'dark';
+    document.documentElement.setAttribute('data-theme', t);
+  </script>
 </body>
 </html>
